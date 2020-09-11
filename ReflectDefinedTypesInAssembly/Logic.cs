@@ -31,27 +31,51 @@ namespace ReflectDefinedTypesInAssembly
          {
             throw ex;
          }
-         Type[] publicTypes = null;
-
+         Type[] interfaces = null;
+         Type[] classes = null;
+         Type[] structs = null;
+         Type[] enums = null;
          try
          {
-            publicTypes = assembly.GetTypes().OrderBy(t => t.FullName).ToArray();
+            interfaces = assembly.GetTypes().Where(t => t.IsInterface).OrderBy(t => t.FullName).ToArray();
+            classes = assembly.GetTypes().Where(t => t.IsClass).OrderBy(t => t.FullName).ToArray();
+            structs = assembly.GetTypes().Where(t => t.IsValueType && !t.IsEnum).OrderBy(t => t.FullName).ToArray();
+            enums = assembly.GetTypes().Where(t => t.IsEnum).OrderBy(t => t.FullName).ToArray();
          }
          catch (Exception ex)
          {
             throw ex;
          }
 
-         if (publicTypes != null)
+         if (interfaces != null)
          {
-            FormatTypes(publicTypes, sb);
+            FormatTypes(interfaces, sb, "Interfaces:");
          }
+         if (classes != null)
+         {
+            FormatTypes(classes, sb, "Classes:");
+         }
+         if (structs != null)
+         {
+            FormatTypes(structs, sb, "Structs:");
+         }
+         if (enums != null)
+         {
+            FormatTypes(enums, sb, "Enums:");
+         }
+
          return sb.ToString();
       }
-      private void FormatTypes(Type[] types, StringBuilder targetSB)
+      private void FormatTypes(Type[] types, StringBuilder targetSB, string header)
       {
+         if (types.Count() == 0)
+         {
+            return;
+         }
+         targetSB.AppendLine(header);
          foreach (Type t in types)
          {
+            targetSB.Append('\t');
             targetSB.AppendLine(t.ToString());
          }
       }
