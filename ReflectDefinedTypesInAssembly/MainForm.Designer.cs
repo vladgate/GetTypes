@@ -47,6 +47,10 @@
          // 
          // txtFilePath
          // 
+         this.txtFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+         this.txtFilePath.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+         this.txtFilePath.ForeColor = System.Drawing.SystemColors.InfoText;
          this.txtFilePath.Location = new System.Drawing.Point(137, 13);
          this.txtFilePath.Name = "txtFilePath";
          this.txtFilePath.ReadOnly = true;
@@ -55,6 +59,7 @@
          // 
          // btnSelectFile
          // 
+         this.btnSelectFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
          this.btnSelectFile.Location = new System.Drawing.Point(784, 11);
          this.btnSelectFile.Name = "btnSelectFile";
          this.btnSelectFile.Size = new System.Drawing.Size(138, 23);
